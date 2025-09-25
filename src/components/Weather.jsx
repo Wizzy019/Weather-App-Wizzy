@@ -13,6 +13,9 @@ const Weather = () => {
 
     const inpurRef =useRef();
     const [weatherData, setWeatherData] = useState(false);
+    const [ message, showMessage ] = useState("")
+
+
 
     const allIcons = {
       "01d": clear_icon,
@@ -34,8 +37,10 @@ const Weather = () => {
     const search = async (city) => {
             
         if(city === ""){
-          alert("Enter city Name");
+          showMessage("Enter a city name!")
           return;
+        } else {
+          showMessage("")
         }
          
         try{
@@ -69,6 +74,7 @@ return (
             <input ref={inpurRef} type="text" placeholder='search' />
           <img src={search_icon} alt="" onClick={() =>search(inpurRef.current.value)}/>
         </div>
+          <p className='message'>{message}</p>
         {weatherData?
         <>
            <img src={weatherData.icon} alt="" className='weather-icon'/>
